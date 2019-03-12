@@ -47,7 +47,7 @@ Verification rules are split into three part in CKB implementation. `Header Veri
 
    2. duplicate
 
-        Block transactions MUST be uniqueness.
+        Block transactions MUST be unique.
 
    3. cellbase
 
@@ -98,11 +98,11 @@ Verification rules are split into three part in CKB implementation. `Header Veri
     4. capacity verification
 
        * Transaction capacity sum of inputs MUST greater or equal capacity sum of outputs.
-       * All outputs' occupied_capacity MUST less than specify capacity.
+       * All outputs' occupied_capacity MUST less than or equal to specify capacity.
 
     5. input uniqueness verification
 
-        Input must be uniqueness.
+        Input must be unique.
 
     6. input/dep status verification
 
