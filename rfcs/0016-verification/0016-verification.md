@@ -15,6 +15,10 @@ This RFC describes ckb block data verification rules.
 
 Verification rules are split into three categories in CKB implementation. `Header Verification`,  `Block Verification` and `Transaction Verification`.
 
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
+
+## Definition
+
 ## Specification
 
 1. Header Verification
@@ -67,8 +71,8 @@ Verification rules are split into three categories in CKB implementation. `Heade
 
       * uncles hash: The hash MUST match the [CFB][2] serialized uncles.
       * number: there are at most 2 uncles included in one block.
-      * depth: an uncle must be the k-th generation ancestor of Block, where 2 <= k <= 7.
-      * epoch: uncle must be the same epoch with block.
+      * depth: uncle's number MUST less than block's number - m, greater than block's number - n, the current m = 1, n =6.
+      * epoch: uncle MUST be the same epoch with block.
       * uniqueness: an uncle must be different from all uncles included in previous blocks and all other uncles included in the same block (non-double-inclusion).
 
    7. block size limit
@@ -97,8 +101,8 @@ Verification rules are split into three categories in CKB implementation. `Heade
 
     4. capacity verification
 
-       * The total capacity referenced by transaction inputs MUST be greater or equal than the total capacity of outputs.
-       * Each output's occupied_capacity MUST less than or equal than its capacity.
+       * Transaction capacity sum of inputs MUST greater or equal capacity sum of outputs.
+       * Each output's occupied_capacity MUST less than or equal to specify capacity.
 
     5. input uniqueness verification
 
@@ -110,8 +114,9 @@ Verification rules are split into three categories in CKB implementation. `Heade
 
     7. script verification
 
-        Execution script in CKB-VM, perform user-define validation rules.
+        Execution script in [CKB-VM][3], perform user-define validation rules.
 
 
 [1]: https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0006-merkle-tree/0006-merkle-tree.md#merkle-proof
 [2]: https://github.com/nervosnetwork/rfcs/pull/47
+[3]: https://github.com/nervosnetwork/rfcs/tree/master/rfcs/0003-ckb-vm
